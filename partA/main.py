@@ -8,34 +8,12 @@ from keras.layers.convolutional import MaxPooling2D
 from keras.layers import Activation
 import tensorflow as tf
 import numpy as np
-model = Sequential()
-def build(filters,size_filters,neurons,activation):
-  for (f,s) in zip(filters,size_filters):
-    model.add(Conv2D(f, s))
-    model.add(Activation(activation))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-  model.add(Dense(neurons,activation=activation))
-  model.add(Flatten())
-  model.add(Dense(10,activation='softmax'))
-  model.compile(optimizer=tf.keras.optimizers.Adam(), loss=tf.keras.losses.SparseCategoricalCrossentropy(),metrics=["accuracy"])
-
-
-from keras.models import Sequential
-# import os
-# print(os.listdir("../iNaturalist_Dataset/inaturalist_12K/train/"))
-from keras.datasets import fashion_mnist
-from keras.layers.convolutional import Conv2D
-from keras.layers import Dense, Flatten, InputLayer
-from keras.layers.convolutional import MaxPooling2D
-from keras.layers import Activation
-import tensorflow as tf
-import numpy as np
+from data import *
 
 #placeholder - here I will get the data
-x_train=np.random.rand(1000,240,240,3)
-y_train=np.random.rand(1000)
-x_validate=np.random.rand(100,240,240,3)
-y_validate=np.random.rand(100)
+train = preprocess_img(datatype='train',batch_size=32,target_size=(240,240))
+validate=preprocess_img(datatype='validate',batch_size=32,target_size=(240,240))
+
 #creating objet of sequential model
 model = Sequential()
 
@@ -56,11 +34,13 @@ def build(filters,size_filters,neurons,activation):
   #output layer
   model.add(Dense(10,activation='softmax'))
   #compiling the whole thing
-  model.compile(optimizer=tf.keras.optimizers.Adam(), loss=tf.keras.losses.SparseCategoricalCrossentropy(),metrics=["accuracy"])
+  model.compile(optimizer=tf.keras.optimizers.Adam(), loss='categorical_crossentropy',metrics=["accuracy"])
 
 
 build([16,16,16,16,16],[(3,3),(3,3),(3,3),(3,3),(3,3)],10,'relu')
 #training
-model.fit(x=x_train,y=y_train,epochs=1)
+model.fit( train,
+        steps_per_epoch=len(train),
+        epochs=1)
 #the model summary
 model.summary()
