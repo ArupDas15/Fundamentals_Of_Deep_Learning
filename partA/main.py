@@ -1,6 +1,6 @@
 #used to initialize NN
 from keras.models import Sequential
-#used for convulotion step which makes convolution layer
+#used for convolution step which makes convolution layer
 from keras.layers.convolutional import Conv2D
 # used to add layers (hidden layer and outputs)
 from keras.layers import Dense
@@ -21,7 +21,7 @@ model = Sequential()
 
 #this function builds the CNN with parameters passed by the users.
 def build(filters,size_filters,neurons,activation,input_shape):
-  # Boolean flag to check if it is the first convolution layer
+  # Flag to check if it is the first convolution layer
   first_conv_layer = 0
   # iterating through filter and size_filters taking one from each at a time
   for (f,s) in zip(filters,size_filters):
