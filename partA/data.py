@@ -59,8 +59,11 @@ def preprocess_img(datatype,batch_size=64,target_size=(240,240)):
         """ Since the training data is large in size so we save the processed images in Output folder before doing any further computations.
             This workaround is done because on the fly computation could lead to memory error due to large training data. 
         """
-        resize(datatype, target_size=target_size)
+
         # load and iterate over training dataset. To evaluate the model set ‘shuffle‘ to ‘False.’
         data = dataset.flow_from_directory(os.path.join(os.path.dirname(os.getcwd()),'Output',datatype), class_mode='categorical', batch_size=batch_size, target_size=target_size,shuffle=False)
     return data
 
+# this function will used to resize only once for a new training sesion
+def resize_train_image(datatype,target_size=(240,240)):
+    resize(datatype, target_size=target_size)
