@@ -3,6 +3,7 @@ from PIL import Image
 import os
 import glob
 import numpy as np
+from os import path
 
 
 # Reference: https://jdhao.github.io/2017/11/06/resize-image-to-square-with-padding/
@@ -62,14 +63,17 @@ def preprocess_img(datatype, batch_size=64, target_size=(240, 240)):
         """ Since the training data is large in size so we save the processed images in Output folder before doing any further computations.
             This workaround is done because on the fly computation could lead to memory error due to large training data. 
         """
-        dataset_augmentar = ImageDataGenerator(rescale=1. / 255)
+        dataset_augmentar = ImageDataGenerator(rescale=1. / 255, rotation_range=30,
+                                               width_shift_range=0.3,
+                                               height_shift_range=0.2,
+                                               shear_range=0.1,
+                                               zoom_range=0.3)
+        """ if Output data is available don't resize again. If it's not
+         available use training data to get it's resized version."""
+        if not path.exists(os.path.join(os.path.dirname(os.getcwd()), 'Output', datatype)):
+            resize(datatype, target_size=target_size)
         # load and iterate over training dataset. To evaluate the model set ‘shuffle‘ to ‘False.’
         data = dataset_augmentar.flow_from_directory(os.path.join(os.path.dirname(os.getcwd()), 'Output', datatype),
                                                      class_mode='categorical', batch_size=batch_size,
                                                      shuffle=True)
     return data
-
-
-# this function will used to resize only once for a new training sesion
-def resize_train_image(datatype, target_size=(240, 240)):
-    resize(datatype, target_size=target_size)
