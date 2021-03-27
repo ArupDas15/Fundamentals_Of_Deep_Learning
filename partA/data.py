@@ -9,7 +9,7 @@ base_path = '/content/iNaturalist_Dataset/inaturalist_12K/'
 
 
 # Reference: https://jdhao.github.io/2017/11/06/resize-image-to-square-with-padding/
-def resize(datatype, target_size=(240, 240)):
+def resize(datatype, target_size):
     desired_size = target_size[0]
     # Get the list of folders in the directory datatype
     datatype_path = os.path.join(base_path, datatype)
@@ -57,9 +57,8 @@ def resize(datatype, target_size=(240, 240)):
         return np.array(data), np.array(data_label)
 
 
-# Reference: https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator
-# #flow_from_directory
-def preprocess_img(datatype, batch_size=64, target_size=(240, 240)):
+# Reference: https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator#flow_from_directory
+def preprocess_img(datatype, batch_size, target_size):
     data = None
     output_path = os.path.join(base_path, 'Output')
     datatype_path = os.path.join(output_path, datatype)
@@ -75,7 +74,7 @@ def preprocess_img(datatype, batch_size=64, target_size=(240, 240)):
         # x is a numpy array of image data and y is a numpy array of corresponding labels.
         x, y = resize(datatype, target_size=target_size)
         # load and iterate over validation or test data.
-        data = re_scale.flow(x, y, batch_size=batch_size)
+        data = re_scale.flow(x, y, batch_size=batch_size, target_size=target_size)
     elif datatype == 'validate':
         """Since the training data is large in size so we save the processed images in Output folder before doing any 
         further computations. This workaround is done because on the fly computation could lead to memory error due 
@@ -83,11 +82,12 @@ def preprocess_img(datatype, batch_size=64, target_size=(240, 240)):
         if not path.exists(datatype_path):
             resize(datatype, target_size=target_size)
         # load and iterate over training dataset. To evaluate the model set ‘shuffle‘ to ‘False.’
-        data = re_scale.flow_from_directory(os.path.join(output_path, datatype), shuffle=False)
+        data = re_scale.flow_from_directory(os.path.join(output_path, datatype), shuffle=False, target_size=target_size)
     elif datatype == 'train':
         print('datatype')
         if not path.exists(datatype_path):
             resize(datatype, target_size=target_size)
             # load and iterate over training dataset. To evaluate the model set ‘shuffle‘ to ‘False.’
-        data = dataset_augment.flow_from_directory(os.path.join(output_path, datatype), shuffle=True)
+        data = dataset_augment.flow_from_directory(os.path.join(output_path, datatype), shuffle=True,
+                                                   target_size=target_size)
     return data
