@@ -57,7 +57,8 @@ def resize(datatype, target_size):
         return np.array(data), np.array(data_label)
 
 
-# Reference: https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator#flow_from_directory
+# Reference: https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator
+# #flow_from_directory
 def preprocess_img(datatype, batch_size, target_size):
     data = None
     output_path = os.path.join(base_path, 'Output')
@@ -84,7 +85,6 @@ def preprocess_img(datatype, batch_size, target_size):
         # load and iterate over training dataset. To evaluate the model set ‘shuffle‘ to ‘False.’
         data = re_scale.flow_from_directory(os.path.join(output_path, datatype), shuffle=False, target_size=target_size)
     elif datatype == 'train':
-        print('datatype')
         if not path.exists(datatype_path):
             resize(datatype, target_size=target_size)
             # load and iterate over training dataset. To evaluate the model set ‘shuffle‘ to ‘False.’
