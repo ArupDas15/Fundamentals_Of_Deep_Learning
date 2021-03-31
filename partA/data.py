@@ -5,7 +5,7 @@ import glob
 import numpy as np
 from os import path
 
-base_path=os.path.join(os.path.dirname(os.getcwd()),'iNaturalist_Dataset','inaturalist_12K')
+base_path='/content/iNaturalist_Dataset/inaturalist_12K/'
 
 
 def get_resized_image(desired_size,file):
@@ -62,7 +62,6 @@ def resize(datatype, target_size):
 
 
 # Reference: https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator
-# #flow_from_directory
 def preprocess_img(datatype, batch_size, target_size):
     data = None
     output_path = os.path.join(base_path, 'Output')
