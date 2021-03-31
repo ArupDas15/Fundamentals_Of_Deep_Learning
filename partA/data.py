@@ -14,12 +14,11 @@ def resize(datatype, target_size):
     # Get the list of folders in the directory datatype
     datatype_path = os.path.join(base_path, datatype)
     output_path = os.path.join(base_path, 'Output')
-    class_labels = os.listdir(datatype_path)
     # Assigns a numerical value to every distinct class in the dataset by creating a dictionary.
     label_dict = {'Amphibia': 0, 'Reptilia': 1, 'Plantae': 2, 'Mollusca': 3, 'Fungi': 4, 'Aves': 5, 'Mammalia': 6,
                   'Animalia': 7, 'Insecta': 8,
-                  'Arachnida': 9}  # data is a list which stores the numpy array of every image
-    # store the numpy data
+                  'Arachnida': 9}
+    # data is a list which stores the numpy array of every image
     data = []
     # data_label is a list which stores the categorical label corresponding to every image matrix in data
     data_label = []
@@ -75,7 +74,7 @@ def preprocess_img(datatype, batch_size, target_size):
         # x is a numpy array of image data and y is a numpy array of corresponding labels.
         x, y = resize(datatype, target_size=target_size)
         # load and iterate over validation or test data.
-        data = re_scale.flow(x, y, batch_size=batch_size, target_size=target_size)
+        data = re_scale.flow(x, y, batch_size=batch_size)
     elif datatype == 'validate':
         """Since the training data is large in size so we save the processed images in Output folder before doing any 
         further computations. This workaround is done because on the fly computation could lead to memory error due 
