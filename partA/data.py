@@ -5,7 +5,27 @@ import glob
 import numpy as np
 from os import path
 
-base_path = '/content/iNaturalist_Dataset/inaturalist_12K/'
+base_path=os.path.join(os.path.dirname(os.getcwd()),'iNaturalist_Dataset','inaturalist_12K')
+
+
+def get_resized_image(desired_size,file):
+    im = Image.open(file)
+    current_size = im.size
+    # We divide by the maximum dimension so that the resized image does not extend beyond the desired size
+    ratio = float(desired_size) / max(current_size)
+    """ Resize the input image so that its maximum side is equal to the target dimension.
+		If maximum dimension equals the given dimension then all other dimension will also fit in the square.
+	"""
+    new_size = (int(ratio * current_size[0]), int(ratio * current_size[1]))
+    # Resize the current image
+    im = im.resize(new_size, Image.ANTIALIAS)
+    # create a new image of desired size
+    new_im = Image.new("RGB", (desired_size, desired_size))
+    """ paste the resized image on the black image obtained above. We are dividing the margin by 2 and taking it
+	floor. We are doing this there should be equal amount of margin on both sides."""
+    new_im.paste(im, ((desired_size - new_size[0]) // 2,
+                      (desired_size - new_size[1]) // 2))
+    return new_im
 
 
 # Reference: https://jdhao.github.io/2017/11/06/resize-image-to-square-with-padding/
@@ -29,22 +49,7 @@ def resize(datatype, target_size):
                 os.makedirs(os.path.join(output_path, datatype, key))
 
         for file in glob.glob(class_folder + "/*"):
-            im = Image.open(file)
-            current_size = im.size
-            # We divide by the maximum dimension so that the resized image does not extend beyond the desired size
-            ratio = float(desired_size) / max(current_size)
-            """ Resize the input image so that its maximum side is equal to the target dimension.
-                If maximum dimension equals the given dimension then all other dimension will also fit in the square.
-            """
-            new_size = (int(ratio * current_size[0]), int(ratio * current_size[1]))
-            # Resize the current image
-            im = im.resize(new_size, Image.ANTIALIAS)
-            # create a new image of desired size
-            new_im = Image.new("RGB", (desired_size, desired_size))
-            """ paste the resized image on the black image obtained above. We are dividing the margin by 2 and taking it
-            floor. We are doing this there should be equal amount of margin on both sides."""
-            new_im.paste(im, ((desired_size - new_size[0]) // 2,
-                              (desired_size - new_size[1]) // 2))
+            new_im = get_resized_image(desired_size=desired_size,file=file)
             if datatype in ('train', 'validate'):
                 file_name = os.path.join(output_path, datatype, key, os.path.basename(file))
                 new_im.save(file_name)
