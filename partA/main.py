@@ -1,5 +1,8 @@
 from keras.models import Sequential
 from keras_preprocessing.image import ImageDataGenerator
+# import os
+# print(os.listdir("../iNaturalist_Dataset/inaturalist_12K/train/"))
+from keras.datasets import fashion_mnist
 from keras.layers.convolutional import Conv2D
 from keras.layers import Dense, Flatten, InputLayer
 from keras.layers.convolutional import MaxPooling2D
@@ -7,73 +10,85 @@ from keras.layers import Activation
 import tensorflow as tf
 import wandb
 from wandb.keras import WandbCallback
+import numpy as np
 
 
+# placeholder - here I will get the data
+# train = preprocess_img(datatype='train',batch_size=32,target_size=(126,126))
+# validate=preprocess_img(datatype='validate',batch_size=32,target_size=(126,126))
 
-path='/content/iNaturalist_Dataset/inaturalist_12K/'
+# creating objet of sequential model
 
 
 # this function builds the CNN with parameters passed by the users.
-def build(input_shape, filters, size_filters, neurons, activation, optimiser, normalize, dropout, dropout_rate):
+def build(input_shape, filters, size_filters, neurons, activation, optimiser, normalize, dropout_rate):
     # iterating through filter and size_filters taking one from each at a time
     i = 0
     tf.keras.backend.clear_session()
     model = Sequential()
-    model.add(tf.keras.layers.experimental.preprocessing.RandomCrop(height=input_shape[0], width=input_shape[1]))
-    model.add(tf.keras.Input(shape=input_shape))
+    model.add(tf.keras.layers.experimental.preprocessing.RandomCrop(height=input_shape[0], width=input_shape[1],
+                                                                    input_shape=(input_shape[0], input_shape[1], 3)))
+    # model.add(tf.keras.Input(shape=input_shape))
+    # if dropout is being done drop with probability .2 in imput layer
+    if dropout_rate != 0:
+        model.add(tf.keras.layers.Dropout(rate=.2))
     for (f, s) in zip(filters, size_filters):
         # Adding convulational layer with f filters and s as the poolsize
         model.add(Conv2D(f, s, kernel_initializer=tf.keras.initializers.GlorotNormal(seed=42)))
         if normalize:
             # adding batch normalization
-            model.add(tf.keras.layers.BatchNormalization())
+            model.add(tf.keras.layers.BatchNormalization(momentum=.5))
         # adding relu layer after convulational layer
         model.add(Activation(activation))
         # adding max pooling layer
         model.add(MaxPooling2D(pool_size=(2, 2)))
-        if dropout:
-            # adding dropout to first and second CNN block only.
-            if i == 0 or i == 1:
-                model.add(tf.keras.layers.Dropout(rate=1 - dropout_rate))
-
-        i = i + 1
-    # flattening the output of previous layers before passing to softmax
+        model.add(tf.keras.layers.Dropout(rate=dropout_rate))
+    # flattenin the output of previous layers before passing to softmax
     model.add(Flatten())
 
     # adding dense layer with requisite number of neurons
-    model.add(Dense(512, activation=activation))
+    model.add(Dense(1024, activation=activation))
+    model.add(tf.keras.layers.Dropout(rate=dropout_rate))
     # output layer
     model.add(Dense(10, activation='softmax'))
     # compiling the whole thing
     model.compile(optimizer=optimiser, loss='categorical_crossentropy', metrics=["accuracy"])
     return model
 
+
+
+
+
 def train():
     run = wandb.init()
-    opti = None
-    #wandb.run.name = run.config.optimiser+str(np.random.rand(1))
-    if run.config.filter_architecture == 'increasing':
-      filter_architecture=[64,128,256,350,380]
-    elif run.config.filter_architecture == 'decreasing':
-      filter_architecture=[64,70,80,90,256]
-    elif run.config.filter_architecture == 'equal':
-      filter_architecture= [64,70,80,90,128]
+
+    start_filter = run.config.start_filter
+    arch_parameter = run.config.arch_parameter
+    filter_architecture = []
+    for i in range(0, 5):
+        filter_architecture.append(int(start_filter * arch_parameter ** i))
     print(filter_architecture)
-    optimiser = tf.keras.optimizers.Nadam(learning_rate=.0007)
-    normalize=False
-    if run.config.batch_normalize == 'Yes':
-        normalize=True
-    dropout =False
-    dropout_rate=0
-    if run.config.dropout != 'None':
-      dropout_rate=run.config.dropout
-      dropout=True
-    model=build((299,299,3),filter_architecture,[(3,3),(3,3),(3,3),(3,3),(3,3)],32,'relu',optimiser=optimiser,normalize=normalize,dropout=dropout,dropout_rate=dropout_rate)
-    #training
-    dataset_augment = ImageDataGenerator(rescale=1. / 255,rotation_range=20, width_shift_range=0.1, height_shift_range=0.1,
-                         shear_range=0.2, zoom_range=0.2, horizontal_flip=True,
-                         fill_mode="nearest")
-    train=dataset_augment.flow_from_directory(os.path.join(path,'train'), shuffle=True, target_size=(600,600),batch_size=32)
-    validate=ImageDataGenerator(rescale=1. / 255).flow_from_directory(os.path.join(path,'validate'), shuffle=False, target_size=(600,600))
-    model.fit(train ,steps_per_epoch=len(train),epochs=10, validation_data=validate,callbacks=[WandbCallback()])
+    optimiser = tf.keras.optimizers.Adam(learning_rate=.0004)
+    normalize = run.config.batch_normalize
+    conv1 = run.config.conv1
+    conv2 = run.config.conv2
+    conv3 = run.config.conv3
+    conv4 = run.config.conv4
+    conv5 = run.config.conv5
+    dropout_rate = 1 - run.config.dropout
+    wandb.run.name = 'epoch_2_filter_size' + str(conv1) + '_' + str(conv2) + '_' + str(conv3) + '_' + str(
+        conv4) + '_' + str(conv5) + '_drop_' + str(round(1 - dropout_rate, 4)) + '_normalize_' + str(
+        run.config.batch_normalize) + '_start_fil_' + str(round(start_filter, 0)) + '_arch_param_' + str(
+        round(arch_parameter, 4))
+
+    model = build((300, 300, 3), filter_architecture,
+                  [(conv1, conv1), (conv2, conv2), (conv3, conv3), (conv4, conv4), (conv5, conv5)], 32, 'relu',
+                  optimiser=optimiser, normalize=normalize, dropout_rate=dropout_rate)
+    # training
+    dataset_augment = ImageDataGenerator(rescale=1. / 255)
+    train = dataset_augment.flow_from_directory(os.path.join('/content/iNaturalist_Dataset/inaturalist_12K/train'),
+                                                shuffle=True, target_size=(800, 800), batch_size=32)
+    validate = ImageDataGenerator(rescale=1. / 255).flow_from_directory(
+        os.path.join('/content/iNaturalist_Dataset/inaturalist_12K/validate'), shuffle=False, target_size=(800, 800))
+    model.fit(train, steps_per_epoch=len(train), epochs=2, validation_data=validate, callbacks=[WandbCallback()])
     model.save('/content/drive/MyDrive/Models/model.keras')
