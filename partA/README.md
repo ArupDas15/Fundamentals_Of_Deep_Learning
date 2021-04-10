@@ -29,7 +29,7 @@ The input at every layer is randomly initialised using `xavier normal` initialis
 ## How is the model trained? ##
 We utilised the RandomCrop class in Keras which randomly crops all images belonging to the same batch to the same cropping location. This proved to be a good substitute for Data augmentation as it helped to improve the robustness of the model.
 We take the images from the train directory and set it to 400 * 400 size and fit the training images on the compiled model using `model.fit()`.
-***Example***:</br> 
+</br>***Example***:</br> 
 ```model.fit(train, steps_per_epoch=len(train), epochs=2, validation_data=validate, callbacks=[WandbCallback()])```</br>
 
 ## How to change  number of filters, size of filters and activation function? ##
