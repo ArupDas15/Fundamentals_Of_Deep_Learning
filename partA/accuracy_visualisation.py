@@ -2,13 +2,14 @@ import numpy as np
 import os
 import random
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 from tensorflow import keras
 from keras.utils import to_categorical
 from keras_preprocessing.image import ImageDataGenerator
 from PIL import Image
 import glob
 
-best_model = keras.models.load_model('/content/model1.keras')
+best_model = keras.models.load_model('/content/best_model.keras')
 base_path = os.path.join(os.getcwd(), 'iNaturalist_Dataset', 'inaturalist_12K', 'test')
 test_data = ImageDataGenerator(rescale=1. / 255)
 test = test_data.flow_from_directory(base_path, shuffle=True, target_size=(400, 400), batch_size=32)
@@ -76,6 +77,9 @@ def plot_test_predictions(no_of_images=30, target_size=(400, 400)):
 
 				plt.tight_layout(pad=5)
 				plt.imshow(test_data[i])
+	red_patch = mpatches.Patch(color='red', label='Miss-classified Image')
+	green_patch = mpatches.Patch(color='green', label='Correctly classified Image')
+	plt.legend(handles=[green_patch, red_patch ],bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
 	plt.show()
 
 
