@@ -1,7 +1,6 @@
 from keras.models import Sequential
 from keras_preprocessing.image import ImageDataGenerator
-# import os
-# print(os.listdir("../iNaturalist_Dataset/inaturalist_12K/train/"))
+import os
 from keras.datasets import fashion_mnist
 from keras.layers.convolutional import Conv2D
 from keras.layers import Dense, Flatten, InputLayer
@@ -43,7 +42,7 @@ def build(input_shape, filters, size_filters, neurons, activation, optimiser, no
         # adding max pooling layer
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(tf.keras.layers.Dropout(rate=dropout_rate))
-    # flattenin the output of previous layers before passing to softmax
+    # flattening the output of previous layers before passing to softmax
     model.add(Flatten())
 
     # adding dense layer with requisite number of neurons
