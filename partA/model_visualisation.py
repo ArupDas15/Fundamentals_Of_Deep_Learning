@@ -26,7 +26,7 @@ def report_accuracy():
 	print('Test accuracy:', acc)
 
 
-def plot_test_predictions(no_of_images=30, target_size=(240, 240)):
+def plot_test_predictions(no_of_images=30, target_size=(400, 400)):
 	test_data = []
 	true_class = []
 	predicted_class = []
@@ -44,7 +44,7 @@ def plot_test_predictions(no_of_images=30, target_size=(240, 240)):
 		# Finding the absolute location of the randomly sampled image
 		file_path = os.path.join(folder_path, random_file)
 		im = Image.open(file_path)
-		im = im.resize((400, 400), Image.ANTIALIAS)
+		im = im.resize(target_size, Image.ANTIALIAS)
 		img = np.array(im)
 		# Storing the numpy array of the image data in a list.
 		test_data.append(img)
@@ -80,4 +80,4 @@ def plot_test_predictions(no_of_images=30, target_size=(240, 240)):
 
 
 report_accuracy()
-plot_test_predictions(no_of_images=30, target_size=(240, 240))
+plot_test_predictions(no_of_images=30, target_size=(400, 400))
