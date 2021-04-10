@@ -25,7 +25,7 @@ arg7 : normalize : A boolean value (`True` or `False`) to denote if batch normal
 arg8 : dropout_rate : The dropout rate signifies the probability of keeping a neuron. Hence the probability of dropping a neuron is 1-dropout_rate.<br />
 
 The input at every layer is randomly initialised using `xavier normal` initialisation with a seed value 42.<br />
-## How is the model trained?##
+## How is the model trained? ##
 We utilised the RandomCrop class in Keras which randomly crops all images belonging to the same batch to the same cropping location. This proved to be a good substitute for Data augmentation as it helped to improve the robustness of the model.
 We take the images from the train directory and set it to 400 * 400 size and fit the training images on the compiled model using `model.fit()`.
 ***Example***:</br> 
@@ -34,7 +34,7 @@ We take the images from the train directory and set it to 400 * 400 size and fit
 ## How to change  number of filters, size of filters and activation function? ##
 To change  the number of filters, size of filters and activation function we can pass the required parameters to `build()` in train() of main.py.
 </br>***Example***:</br>
-```build((300, 300, 3), [128, 160, 200, 250, 312],[(5, 5), (7, 7), (7, 7), (3, 3), (5, 5)], 32, 'relu',optimiser=tensorflow.keras.optimizers.Adam(learning_rate=.0004), normalize=True, dropout_rate=1)```
+```build((300, 300, 3), [128, 160, 200, 250, 312],[(5, 5), (7, 7), (7, 7), (3, 3), (5, 5)], 'relu',optimiser=tensorflow.keras.optimizers.Adam(learning_rate=.0004), normalize=True, dropout_rate=1)```
 ## How is the model evaluated? ##
 The images from the test directory are chosen randomly and stretched to (400,400) dimension irrespective of the original size of the image. The best model is loaded and the accuracy on the model is evaluated by calling `model.evaluate()` to report the accuracy.
 </br>***Example***</br>
