@@ -23,6 +23,7 @@ arg4 : activation : Accepts a string as input. Indicates the type of activation 
 arg6 : optimiser : The kind of optimiser algorithm to be used in CNN. It is of type optimizer ingerited from tensorflow.keras.optimizers<br />
 arg7 : normalize : A boolean value (`True` or `False`) to denote if batch normalization needs to be performed for the input at every layer. If set to true the buold() performs batch normalization.<br />
 arg8 : dropout_rate : The dropout rate signifies the probability of keeping a neuron. Hence the probability of dropping a neuron is 1-dropout_rate.<br />
+arg9 : neurons : Denotes the number of neurons in the dense layer. Default value set to 1024.<br/>
 
 The input at every layer is randomly initialised using `xavier normal` initialisation with a seed value 42.<br />
 ## How is the model trained? ##
@@ -34,7 +35,7 @@ We take the images from the train directory and set it to 400 * 400 size and fit
 ## How to change  number of filters, size of filters and activation function? ##
 To change  the number of filters, size of filters and activation function we can pass the required parameters to `build()` in train() of main.py.
 </br>***Example***:</br>
-```build((300, 300, 3), [128, 160, 200, 250, 312],[(5, 5), (7, 7), (7, 7), (3, 3), (5, 5)], 'relu',optimiser=tensorflow.keras.optimizers.Adam(learning_rate=.0004), normalize=True, dropout_rate=1)```
+```build((300, 300, 3), [128, 160, 200, 250, 312],[(5, 5), (7, 7), (7, 7), (3, 3), (5, 5)], 'relu',optimiser=tensorflow.keras.optimizers.Adam(learning_rate=.0004), normalize=True, dropout_rate=1,neurons=1024)```
 ## How is the model evaluated? ##
 The images from the test directory are chosen randomly and stretched to (400,400) dimension irrespective of the original size of the image. The best model is loaded and the accuracy on the model is evaluated by calling `model.evaluate()` to report the accuracy.
 </br>***Example***</br>
