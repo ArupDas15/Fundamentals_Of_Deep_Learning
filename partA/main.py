@@ -20,17 +20,14 @@ import numpy as np
 
 
 # this function builds the CNN with parameters passed by the users.
-def build(input_shape, filters, size_filters, neurons, activation, optimiser, normalize, dropout_rate):
+def build(input_shape, filters, size_filters, activation, optimiser, normalize, dropout_rate,neurons=1024):
     # iterating through filter and size_filters taking one from each at a time
     i = 0
     tf.keras.backend.clear_session()
-    model = Sequential()
+    model = tf.keras.models.Sequential()
     model.add(tf.keras.layers.experimental.preprocessing.RandomCrop(height=input_shape[0], width=input_shape[1],
                                                                     input_shape=(input_shape[0], input_shape[1], 3)))
     # model.add(tf.keras.Input(shape=input_shape))
-    # if dropout is being done drop with probability .2 in imput layer
-    if dropout_rate != 0:
-        model.add(tf.keras.layers.Dropout(rate=.2))
     for (f, s) in zip(filters, size_filters):
         # Adding convulational layer with f filters and s as the poolsize
         model.add(Conv2D(f, s, kernel_initializer=tf.keras.initializers.GlorotNormal(seed=42)))
@@ -42,20 +39,17 @@ def build(input_shape, filters, size_filters, neurons, activation, optimiser, no
         # adding max pooling layer
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(tf.keras.layers.Dropout(rate=dropout_rate))
-    # flattening the output of previous layers before passing to softmax
+    # flattenin the output of previous layers before passing to softmax
     model.add(Flatten())
 
     # adding dense layer with requisite number of neurons
-    model.add(Dense(1024, activation=activation))
+    model.add(Dense(neurons, activation=activation))
     model.add(tf.keras.layers.Dropout(rate=dropout_rate))
     # output layer
     model.add(Dense(10, activation='softmax'))
     # compiling the whole thing
     model.compile(optimizer=optimiser, loss='categorical_crossentropy', metrics=["accuracy"])
     return model
-
-
-
 
 
 def train():
