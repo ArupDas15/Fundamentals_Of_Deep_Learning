@@ -9,8 +9,9 @@ In this project we Build a small CNN model consisting of 5 convolution layers. E
 5. matplotlib library was used for plotting the (10,3) grid for the predicted images.
 6. Keras and tensorflow was used for getting the fashion mnist dataset.
 7. numpy was used for some mathematical calculations and converting input arrays to types that were acceptible to keras and tensorflow functions. 
+8. wandb was used to find the best hyperparameter configuratin and to make insightful observations from the plots obtained.
 # Installations: #
-1. We have used pip as the package manager. All the libraries we used above can be installed using the pip command
+1. We have used pip as the package manager. All the libraries we used above can be installed using the pip command.
 2. Steps to Add Virtual Environment in IDE like Pycharm: https://www.jetbrains.com/help/pycharm/creating-virtual-environment.html#python_create_virtual_env
 # How to USE? #
 The entire project has been modularised using functions and classes to make it as scalable as possible for future developments and extensions.
@@ -25,7 +26,7 @@ arg7 : normalize : A boolean value (`True` or `False`) to denote if batch normal
 arg8 : dropout_rate : The dropout rate signifies the probability of keeping a neuron. Hence the probability of dropping a neuron is 1-dropout_rate.<br />
 arg9 : neurons : Denotes the number of neurons in the dense layer. Default value set to 1024.<br/>
 
-The input at every layer is randomly initialised using `xavier normal` initialisation with a seed value 42.<br />
+The input at every 2d convolutional layer is randomly initialised using `xavier normal` initialisation with a seed value 42.<br />
 ## How is the model trained? ##
 We utilised the RandomCrop class in Keras which randomly crops all images belonging to the same batch to the same cropping location. This proved to be a good substitute for Data augmentation as it helped to improve the robustness of the model.
 We take the images from the train directory and set it to 400 * 400 size and fit the training images on the compiled model using `model.fit()`.
@@ -50,6 +51,7 @@ To report the accuracy.</br>
 2. CNN using tensor flow: https://www.tensorflow.org/tutorials/images/cnn
 3. CNN 2D class description: https://www.geeksforgeeks.org/keras-conv2d-class/
 4. https://wandb.ai
-5. https://arxiv.org/pdf/1406.4729.pdf
+5. Why do CNNs require a fixed input size?: https://arxiv.org/pdf/1406.4729.pdf
 6. Paper on Dropout : http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf
+7. Guided backpropagation: https://arxiv.org/pdf/1412.6806.pdf
 
