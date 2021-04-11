@@ -6,7 +6,7 @@ In this project we Build a small CNN model consisting of 5 convolution layers. E
 2. PIL library was used to handle images.
 3. random library was used to select images from test set randomly.
 4. os library was used to select images from the desired locations. 
-5. matplotlib library was used for plotting the (10,3) grid for the predicted images.
+5. matplotlib and mpl_toolkits library was used for plotting the (10,3) grid for the predicted images and  visualise all the filters in the first layer of our best model for a random image from the test set respectively.
 6. Keras and tensorflow was used for getting the fashion mnist dataset.
 7. numpy was used for some mathematical calculations and converting input arrays to types that were acceptible to keras and tensorflow functions. 
 8. wandb was used to find the best hyperparameter configuratin and to make insightful observations from the plots obtained.
