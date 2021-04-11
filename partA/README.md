@@ -14,7 +14,7 @@ In this project we Build a small CNN model consisting of 5 convolution layers. E
 1. We have used pip as the package manager. All the libraries we used above can be installed using the pip command.
 2. Steps to Add Virtual Environment in IDE like Pycharm: https://www.jetbrains.com/help/pycharm/creating-virtual-environment.html#python_create_virtual_env
 # How to USE? #
-The entire project has been modularised using functions and classes to make it as scalable as possible for future developments and extensions.
+The entire project has been modularised using functions and objects of classes to make it as scalable as possible for future developments and extensions.
 To train a model the project makes a call to `train` in `main.py` file which inturn makes a call to `build()`. </br>
 The parameters in build are the following <br />
 arg1 : input_shape  : Size of the input image. For e.g. (300,300,3)<br />
