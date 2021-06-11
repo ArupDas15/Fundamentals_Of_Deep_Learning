@@ -18,7 +18,7 @@ Here we use a single layered encoder and a single layered decoder and add an att
 10. Ipython for visualisation
 
 # **NOTE:** 
-The Hindi font file for displaying Hindi characters in the matplotlib plots [here](https://drive.google.com/file/d/11B4BahRBIujMr_jhsw_uXbxN9LF5CHaX/view?usp=sharing). A copy of the same has been upload in the [GitHub project repository](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/Nirmala.ttf). *Kindly upload the same before generating the heatmaps.* 
+The Hindi font file for displaying Hindi characters in the matplotlib plots [here](https://drive.google.com/file/d/11B4BahRBIujMr_jhsw_uXbxN9LF5CHaX/view?usp=sharing). A copy of the same has been upload in the [GitHub project repository](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/Nirmala.ttf). *Kindly upload the same before generating the heatmaps.* 
 
 To run the code using wandb simply **Uncomment** *wandb.agent()* and comment the call to train(). 
 
@@ -34,17 +34,17 @@ To execute the program in Google Colab one can click on the run cell option.
    * We create a dictionary of all the unique characters in the training dataset for both the input language(ENGLISH: inp_lang) and the target language(HINDI: targ_lang).
    * The pairs [HINDI, ENGLISH] of target word and input word(translitereated roman word) are fed into target_tensor_train and input_tensor_train respectively.
  * Begin [training](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/README.md#train).
-   * Log the train loss and [validation accuracy](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/README.md#validate) if [wandb is being used](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/README.md#note).
- * Report the [test accuracy](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/README.md#validate) after the completion of the model training.
- * [Generate](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/README.md#generate_inputs) random number(=**n_test_samples**) of test inputs to evaluate the model performance.
-   * [Predict](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/README.md#transliterate) the target word for each of the test inputs.
-   * Generate the [attention heatmap](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/README.md#plot_attention). This shows which segments of the input word(ENGLISH) takes the model's attention while predicting the target word(HINDI).
-   * [Statically visualise](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/README.md#visualize) the RNN Type ('RNN', 'LSTM', 'GRU') activations.
-   * Perform [connectivity visualisation](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/README.md#connectivity) to understand which is the input(ENGLISH) character that the sequence to sequence model is looking at while decoding the i<sup>th</sup> character in the output(a HINDI character).
+   * Log the train loss and [validation accuracy](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#validate) if [wandb is being used](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#note).
+ * Report the [test accuracy](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#validate) after the completion of the model training.
+ * [Generate](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#generate_inputs) random number(=**n_test_samples**) of test inputs to evaluate the model performance.
+   * [Predict](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#transliterate) the target word for each of the test inputs.
+   * Generate the [attention heatmap](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#plot_attention). This shows which segments of the input word(ENGLISH) takes the model's attention while predicting the target word(HINDI).
+   * [Statically visualise](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#visualize) the RNN Type ('RNN', 'LSTM', 'GRU') activations.
+   * Perform [connectivity visualisation](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#connectivity) to understand which is the input(ENGLISH) character that the sequence to sequence model is looking at while decoding the i<sup>th</sup> character in the output(a HINDI character).
  
 # Sequence to Sequence Model Construction #
 ## train() ##
-Currently, the hyperparameters have been set to the [best configurations](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/README.md#best-model-configurations) we obtained during our experiments.
+Currently, the hyperparameters have been set to the [best configurations](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#best-model-configurations) we obtained during our experiments.
 
 Once the model taining is complete we find the validation accuracy and report the test accuracy and create a folder ***prediction_attention*** with a sub-folder having the name of the hyperparameter configuration(= **run_name**) where we create two files  `success.txt` and `failure.txt`. These files contain `<input word><space><target word><space><predicted word>` of the successful and failed predictions made by the sequence to sequence to sequence.
 
@@ -107,7 +107,7 @@ It creates a folder ***prediction_attention*** with a sub-folder folder_name whe
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | input_word | Accepts string as input. Here we pass the transliterated roman word                                                                                               |
 | rnn_type   | Accepts string as input. Here we pass the type of RNN being used. The acceptable values are 'RNN', 'LSTM', and 'GRU'.                                             |
-| file_path  | Accepts a string as input. Here we pass the file location where we want to store the connectivity visualisation. The visualisation is stored with the file name: [connectivity.html](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/connectivity.html)   |
+| file_path  | Accepts a string as input. Here we pass the file location where we want to store the connectivity visualisation. The visualisation is stored with the file name: [connectivity.html](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/connectivity.html)   |
 
 ## create_file() ##
 `create_file()` is used to create and store the connectivity.html file in the specified  location.
@@ -117,7 +117,7 @@ It creates a folder ***prediction_attention*** with a sub-folder folder_name whe
 | input_word  | Accepts string as input. Here we pass the transliterated roman word                                                                                               |
 | text_colors | List of list where each sublist denotes the color to be given to every input character on mouse hover action on an output character.                              |
 | rnn_type    | Accepts string as input. Here we pass the type of RNN being used. The acceptable values are 'RNN', 'LSTM', and 'GRU'.                                             |
-| file_path   | Accepts a string as input. Here we pass the file location where we want to store the connectivity visualisation. The visualisation is stored with the file name: [connectivity.html](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/connectivity.html) |
+| file_path   | Accepts a string as input. Here we pass the file location where we want to store the connectivity visualisation. The visualisation is stored with the file name: [connectivity.html](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/connectivity.html) |
 
 ## get_shade_color() ##
 `get_shade_color()`: Returns a specific colour depending the value passed to it.  
@@ -163,7 +163,7 @@ Reduce the number of word pairs being generated by create_dataset() to some smal
 
 Also, to reduce the validation datasize reduce the number of inputs in validate() to some small number like 10 instead of len(input_words). 
 
-Run the train() for 1 epoch. To visualise the code for 20 epochs you can restore the model parameters as provided in the [github repository](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/training_checkpoints.zip) using `checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))` after runnning the train function for one epoch.
+Run the train() for 1 epoch. To visualise the code for 20 epochs you can restore the model parameters as provided in the [github repository](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/training_checkpoints.zip) using `checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))` after runnning the train function for one epoch.
 
 ## Best Model Configurations ##
 Several experiments were performed to smartly and strategically analyse the hyperparameter configurations by logging the eprenmental results to wandb. To know a summary of the experiments performed visit [here](https://docs.google.com/spreadsheets/d/16FtG5UmiUgYG-q7mFtxHi9EzqxGpyij9UQmZE_5U9lc/edit?usp=sharing).</br>
