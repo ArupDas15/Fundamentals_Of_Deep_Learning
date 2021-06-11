@@ -33,7 +33,7 @@ To execute the program in Google Colab one can click on the run cell option.
    * Every target word and input word(translitereated roman word) is appended with a **Start of Sequence Character** ***'\t'*** and **End of Sequence Character** ***'\n'***.
    * We create a dictionary of all the unique characters in the training dataset for both the input language(ENGLISH: inp_lang) and the target language(HINDI: targ_lang).
    * The pairs [HINDI, ENGLISH] of target word and input word(translitereated roman word) are fed into target_tensor_train and input_tensor_train respectively.
- * Begin [training](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/README.md#train).
+ * Begin [training](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#train).
    * Log the train loss and [validation accuracy](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#validate) if [wandb is being used](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#note).
  * Report the [test accuracy](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#validate) after the completion of the model training.
  * [Generate](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/blob/master/cs6910_assignment3/seq2seq_with_attention/README.md#generate_inputs) random number(=**n_test_samples**) of test inputs to evaluate the model performance.
