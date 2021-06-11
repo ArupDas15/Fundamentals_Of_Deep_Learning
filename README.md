@@ -13,6 +13,7 @@ To download the repository, type the below command in the command line interface
 `git clone https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning.git`
 
 You can also download the entire repository as a zip file from the Download ZIP option as shown in the image below (click on the Code button to the right to get the Download ZIP option):
+
 ![image](https://user-images.githubusercontent.com/37553488/121744156-18c6b600-cb20-11eb-8cab-a783b2e29867.png)
 
 
