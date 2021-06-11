@@ -5,7 +5,6 @@ In this [project](https://wandb.ai/miteshk/assignments/reports/Assignment-3--Vml
 # Set up and Installation #
 ----------------------------------------------------
 Both vanilla_seq2seq and seq_2_seq_with_attention has been implented in Google Colab.</br>
-`git clone https://github.com/utsavdey/cs6910_assignment3.git`
 
 Visit [here](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/tree/master/cs6910_assignment3/vanilla_seq2seq) to know more about vanilla_seq2seq without attention.</br>
 Visit [here](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/tree/master/cs6910_assignment3/seq2seq_with_attention) to know more about seq2seq with attention network.
