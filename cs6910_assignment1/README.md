@@ -93,6 +93,10 @@ Parameters : </br>
 # Program Flow #
 The program for training the neural network begins by making call to *train()*. The train() passes parmeters to *master()* depending on the configurations provided to configuration.yaml file in wandb for creating a sweep. The master() is responsible for adding layers to the neural network by making calls to *add_layer()* and initializing the training process by calling the *fit()* where forward and backward propagations for every training data point are made with respect to the optimzation algorithm used. The optimization algorithm to be used is passed to opt as an object as described [above](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/tree/master/cs6910_assignment1#how-to-use). After every epoch the validation loss, validation accuracy, training loss and training accuracy is logged in wandb for effective data visualization. The program terminates with master returning the trained neural network. To save the trained neural network model run the code in save_model.py file by providing appropriate values to master(). </br></br>
 P.S. To skip writing observations into wandb comment the train() and wandb.log() statements in main.py file and pass arguments directly to master(). The same procedure to be followed to save a neural network model using the save_model.py file.
+
+# Link to Report #
+The wandb report is available over [here](https://wandb.ai/utsavdey/cs6910_assignment1/reports/Assigment-1-Report---Vmlldzo1MjIzNDQ).
+
 # Acknowledgements #
 1. The entire project has been developed from the leacture slides of Dr. Mitesh Khapra, Indian Institute of Technology Madras: http://cse.iitm.ac.in/~miteshk/CS6910.html#schedule
 2. http://www.cs.cmu.edu/~arielpro/15381f16/c_slides/781f16-17.pdf 
