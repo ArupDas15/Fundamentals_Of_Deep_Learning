@@ -1,0 +1,15 @@
+This file is created to follow good software engineering practices for the development of the project.
+
+Guidelines to be followed during development.
+----------------------------------------------
+1. Comments to be written before the action is to be taken.
+   For e.g. #initialising a to 0
+            a=0
+   The comment can also be written beside the action provided the comment is not too long.
+2. Debug code to not be present in the master branch.
+3. Code of collaborator to be viewed only when pull request is made to avoid any confusions that may arise.
+4. Function names should be lowercase, with words separated by underscores as necessary to improve readability.
+   Variable names follow the same convention as function names.
+   More Details over here: https://www.python.org/dev/peps/pep-0008/#:~:text=%2Dpublic%22).-,Function%20and%20Variable%20Names,same%20convention%20as%20function%20names.
+5. Create pull requests before merging changes to master branch where every pull request should be made with sufficient evidence regarding the correctness of the modified code.
+6. Follow pair programming approach to implement critical algorithms.
