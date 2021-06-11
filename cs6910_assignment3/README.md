@@ -7,8 +7,8 @@ In this [project](https://wandb.ai/miteshk/assignments/reports/Assignment-3--Vml
 Both vanilla_seq2seq and seq_2_seq_with_attention has been implented in Google Colab.</br>
 `git clone https://github.com/utsavdey/cs6910_assignment3.git`
 
-Visit [here](https://github.com/utsavdey/cs6910_assignment3/tree/main/vanilla_seq2seq) to know more about vanilla_seq2seq without attention.</br>
-Visit [here](https://github.com/utsavdey/cs6910_assignment3/tree/main/seq2seq_with_attention) to know more about seq2seq with attention network.
+Visit [here](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/tree/master/cs6910_assignment3/vanilla_seq2seq) to know more about vanilla_seq2seq without attention.</br>
+Visit [here](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/tree/master/cs6910_assignment3/seq2seq_with_attention) to know more about seq2seq with attention network.
 
 # Wandb Report #
 Visit [here](https://wandb.ai/utsavdey/seq_to_seq/reports/Assignment-3--Vmlldzo3MTk1Nzk) for the wandb Report and insightful observations made during the training.
@@ -18,4 +18,4 @@ Visit [here](https://wandb.ai/utsavdey/seq_to_seq/reports/Assignment-3--Vmlldzo3
 * Perform training on a larger dataset.
 
 # **NOTE** 
-The code implemented for both [vanilla sequence to sequence](https://github.com/utsavdey/cs6910_assignment3/blob/main/vanilla_seq2seq/Vanilla_Seq_to_Seq.ipynb) and [sequence to sequence with attention](https://github.com/utsavdey/cs6910_assignment3/blob/main/seq2seq_with_attention/seq2seq_with_attention.ipynb) can be used on any other indian language from the [Dakshina dataset](https://github.com/google-research-datasets/dakshina) by replacing the hi by the language of your choice while setting the train, dev, test set path from the folder **dakshina_dataset_v1.0/hi/lexicons/**. We have used Hindi for our model.
+The code implemented for both [vanilla sequence to sequence](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/tree/master/cs6910_assignment3/vanilla_seq2seq/Vanilla_Seq_to_Seq.ipynb) and [sequence to sequence with attention](https://github.com/ArupDas15/Fundamentals_Of_Deep_Learning/tree/master/cs6910_assignment3/seq2seq_with_attention/seq2seq_with_attention.ipynb) can be used on any other indian language from the [Dakshina dataset](https://github.com/google-research-datasets/dakshina) by replacing the hi by the language of your choice while setting the train, dev, test set path from the folder **dakshina_dataset_v1.0/hi/lexicons/**. We have used Hindi for our model.
