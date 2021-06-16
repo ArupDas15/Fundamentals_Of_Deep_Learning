@@ -47,7 +47,7 @@ To report the accuracy.</br>
 ```print('Test accuracy:', acc)```</br>
 
 # Acknowledgements #
-1. The entire project has been developed from the leacture slides of Dr. Mitesh Khapra, Indian Institute of Technology Madras: http://cse.iitm.ac.in/~miteshk/CS6910.html#schedule
+1. The entire project has been developed from the lecture slides of Dr. Mitesh Khapra, Indian Institute of Technology Madras: http://cse.iitm.ac.in/~miteshk/CS6910.html#schedule
 2. CNN using tensor flow: https://www.tensorflow.org/tutorials/images/cnn
 3. CNN 2D class description: https://www.geeksforgeeks.org/keras-conv2d-class/
 4. https://wandb.ai
