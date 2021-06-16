@@ -98,7 +98,7 @@ P.S. To skip writing observations into wandb comment the train() and wandb.log()
 The wandb report is available over [here](https://wandb.ai/utsavdey/cs6910_assignment1/reports/Assigment-1-Report---Vmlldzo1MjIzNDQ).
 
 # Acknowledgements #
-1. The entire project has been developed from the leacture slides of Dr. Mitesh Khapra, Indian Institute of Technology Madras: http://cse.iitm.ac.in/~miteshk/CS6910.html#schedule
+1. The entire project has been developed from the lecture slides of Dr. Mitesh Khapra, Indian Institute of Technology Madras: http://cse.iitm.ac.in/~miteshk/CS6910.html#schedule
 2. http://www.cs.cmu.edu/~arielpro/15381f16/c_slides/781f16-17.pdf 
 3. https://arxiv.org/pdf/1711.05101.pdf
 4. https://wandb.ai
