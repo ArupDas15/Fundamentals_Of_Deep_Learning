@@ -23,7 +23,7 @@ The data is then fit into the model using `model.fit()`. </br>
 where ```data_train = ImageDataGenerator(rescale=1. / 255).flow_from_directory('/content/iNaturalist_Dataset/inaturalist_12K/train', shuffle=True,target_size=(400,400))```
 </br>Here the images in data_train are loaded from the train directory by rescaling every taining image by a factor of 1/255. This brongs the RGB coefficients of the image in a scale between 0 to 1 making it easier to perform mathematical calculations. 
 # Acknowledgements #
-1. The entire project has been developed from the leacture slides of Dr. Mitesh Khapra, Indian Institute of Technology Madras: http://cse.iitm.ac.in/~miteshk/CS6910.html#schedule
+1. The entire project has been developed from the lecture slides of Dr. Mitesh Khapra, Indian Institute of Technology Madras: http://cse.iitm.ac.in/~miteshk/CS6910.html#schedule
 2. ImageNet Classification with Deep Convolutional Neural Networks https://proceedings.neurips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf
 3. What is pre training? https://martin-thoma.com/ml-glossary/#pre-training
 4. https://wandb.ai
