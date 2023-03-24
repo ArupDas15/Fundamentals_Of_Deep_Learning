@@ -17,8 +17,8 @@ You can also download the entire repository as a zip file from the Download ZIP 
 ![image](https://user-images.githubusercontent.com/37553488/121744156-18c6b600-cb20-11eb-8cab-a783b2e29867.png)
 
 
-# Contributors:
+<!--# Contributors:
 
 1. Arup Das
-2. Utsav Dey
+2. Utsav Dey--!>
 
