@@ -17,8 +17,10 @@ You can also download the entire repository as a zip file from the Download ZIP 
 ![image](https://user-images.githubusercontent.com/37553488/121744156-18c6b600-cb20-11eb-8cab-a783b2e29867.png)
 
 
-<!--# Contributors:
+# Contributors:
 
-1. Arup Das
-2. Utsav Dey--!>
+|   | Name		      																												| Contact                                                 			|	LinkedIn/ Website
+|---|-------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|----------------------------------------------------------|
+| 1 | Arup Das        		| [cs20s016@smail.iitm.ac.in](mailto:cs20s016@smail.iitm.ac.in)     | https://www.linkedin.com/in/arup-das-90033a153/		   |
+| 2 | Utsav Dey															        | [cs20s009@smail.iitm.ac.in](mailto:cs20s009@smail.iitm.ac.in) | https://www.linkedin.com/in/utsav-dey/  |
 
